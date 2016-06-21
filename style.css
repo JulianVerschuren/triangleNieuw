@@ -1,0 +1,10 @@
+
+body {
+  background-color: #000;
+  font-family: "courier", monospace;
+  font-size: large;
+  color: #ffff00;
+}
+#canvas {
+  background-color: #fff;
+}

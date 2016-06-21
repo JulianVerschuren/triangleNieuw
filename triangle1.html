@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Right Angled Triangle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>Ma Right Angled Triangle 1</header>
+
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <header>Julian Verschuren</header>
+
+    <script src="utils.js"></script>
+    <script src="triangle.js"></script>
+    <script>
+        window.onload = function () { //onload doen we zodat eerst de pagina geladen word voor t script uitgevoerd wordt.
+            var canvas = document.getElementById('canvas'); //variabele canvas krijgt de waarde van de aangemaakte canvas in de html
+            context = canvas.getContext('2d'); //context krijgt de waarde van 2d rendering, omdat 3d niet goed werkt.
+
+            mouse = utils.captureMouse(canvas); //lees de positie van de muis uit, is een soort array.
+
+            var posX = 0;
+            var posY = 0;
+
+
+
+
+            var triangle1 = [];
+       
+
+            triangle1 = new Triangle(); // new instance
+            triangle1.colorFill = "#ff0000"; //vult de kleur van de triangle nummero 1
+            triangle1.transparancy = 0.3;
+            //  triangle2 = new Triangle(); // new instance of the class triangle
+            //  triangle2.colorFill = "#0000ff"; //vult de kleur van de triangle nummero 2
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                for (var i = 0; i < 10; i++) {
+                triangle1[i] = new Triangle(); //new instance
+                triangle1[i].colorFill = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+                triangle1[i].xLeft = 20 + 30 * i;
+                triangle1[i].yLeft = 20 + 30 * i;
+                    triangle1[i].x = posX;
+                    triangle1[i].y = posY;
+                      triangle1[i].draw(context);
+                    // triangle1.x = mouse.x; //volgt de muis vanaf de fixed point
+                    // triangle1.y = mouse.y; //volgt de muis vanaf de fixed point
+                    // triangle1.x = canvas.width / 2 + 100;
+                    // triangle1.y = canvas.width / 2 - 100;
+
+
+                    if (posX <= canvas.width && posY == 0) {
+                        posX += 1;
+
+                   
+                        //als x kleiner is dan canvas breedte en y = 0 ga 10 naar rechts.
+                    }
+
+                    if (posX == canvas.width && posY <= canvas.width) {
+                        posX = canvas.width;
+                        posY += 1;
+
+                    
+                    } //als x gelijk is aan canvas breedte en y kleiner is dan breedte ,
+                    // posX word canvas breedte dus 300 en pos y krijgt plus 10 naar beneden.
+
+
+                    if (posY == canvas.height && posX != 0) {
+                        posX -= 1; //als pos y gelijk is aan canvas hoogte en pos x is niet 0, ga naar links
+
+                       
+                    }
+
+                    if (posX == 0 && posY != 0) {
+                        posY -= 1;
+
+                      
+                    }
+
+                }
+
+
+
+
+
+
+
+
+
+                // triangle2.xLeft = canvas.width / 2; // fixed point triangle
+                // triangle2.yLeft = canvas.height / 2; // fixed point triangle
+                //triangle2.x = mouse.x-100; //volgt de muis vanaf de fixed point met een offset van -100 op de x as
+                //triangle2.y = mouse.y-100; //volt de muis vanaf de fixed point met een offset van -100 op de y as
+                //  triangle2.x = canvas.width / 2 - 100; //bepaalt de plaats van de driehoek
+                //  triangle2.y = canvas.width / 2 + 100; //bepaalt de plaats van de drirehoek
+                // triangle2.draw(context); //teknt de tweede driehoek daadwerkelijk op het canvas.
+
+            }())
+        };
+    </script>
+
+</body>
+
+</html>
